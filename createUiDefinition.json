@@ -41,16 +41,16 @@
                     "password": "Domain Password",
                     "confirmPassword": "Confirm password"
                 },
-                "toolTip": "Password to join domain",
+                "toolTip": "Password to join domain J0in4VM$Ware",
                 "constraints": {
                     "required": false,
                     "regex": "",
-                    "validationMessage": ""
+                    "validationMessage": "J0in4VM$Ware"
                 },
                 "options": {
                     "hideConfirmation": true
                 },
-                "visible": false
+                "visible": true
             },
             {
                 "name": "OUPath",
