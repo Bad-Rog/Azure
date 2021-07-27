@@ -25,6 +25,7 @@
     },
     "domainPassword": {
       "type": "secureString",
+      "minLength": 8,
       "metadata": {
         "description": "Password to join domain"
       }
