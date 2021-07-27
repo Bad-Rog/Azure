@@ -100,7 +100,7 @@
                 "multiline": false,
                 "constraints": {
                     "required": true,
-                    "regex": "^[a-zA-Z]{11,15}$",
+                    "regex": "^[a-zA-Z0-9]{11,15}$",
                     "validationMessage": "Please use a VM naming that adheres to the Global Naming Standard. Eg: CHBARSRV7XXXXP1. GNS can be found here: https://globalit.glencore.net/global-it-operations/Pages/Standards-and-requirements.aspx"                   
                 },
                 "visible": true
