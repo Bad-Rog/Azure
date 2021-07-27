@@ -60,8 +60,8 @@
                 "toolTip": "Password to join domain",
                 "constraints": {
                     "required": false,
-                    "regex": "",
-                    "validationMessage": ""
+                    "regex": ".{8,}$",
+                    "validationMessage": "ANYACCESS OU FQDN"
                 },
                 "visible": true
             },
@@ -73,8 +73,8 @@
                 "toolTip": "Size of the virtual machine.",
                 "constraints": {
                     "required": false,
-                    "regex": "",
-                    "validationMessage": ""
+                    "regex": ".{4,}$",
+                    "validationMessage": "Choose the right size"
                 },
                 "visible": true
             },
@@ -133,9 +133,7 @@
                 "defaultValue": "latest",
                 "toolTip": "Choose specific image version. Defaul is latest",
                 "constraints": {
-                    "required": false,
-                    "regex": "",
-                    "validationMessage": ""
+                    "required": false
                 },
                 "visible": true
             }
