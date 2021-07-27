@@ -44,7 +44,7 @@
                 "toolTip": "Password to join domain J0in4VM$Ware",
                 "constraints": {
                     "required": false,
-                    "regex": "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$",
+                    "regex": ".{8,}$",
                     "validationMessage": "The password must be alphanumeric, contain at least 8 characters, and have at least 1 letter and 1 number."
                 },
                 "options": {
