@@ -205,7 +205,7 @@
             "vmSize": "[basics('vmSize')]",
             "location": "[basics('location')]",
             "vmName": "[basics('vmName')]",
-            "vnetName": "[steps('networking').virtualnetwork.name]",
+            "vnetName": "[steps('networking').vnet.name]",
             "vnetResGroup": "[steps('networking').virtualnetwork.resourceGroup]",
             "subnetName": "[steps('networking').virtualnetwork.subnets.subnet1.name]",
             "galleryImageDefinitionName": "[basics('galleryImageDefinitionName')]",
