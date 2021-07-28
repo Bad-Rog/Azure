@@ -179,8 +179,6 @@
 		],
         "outputs": {
             "adminUsername": "[basics('adminUsername')]",
-            "adminPassword": "[basics('adminPassword')]",
-            "domainPassword": "[basics('domainPassword')]",
             "OUPath": "[basics('OUPath')]",
             "vmSize": "[basics('vmSize')]",
             "location": "[location()]",
