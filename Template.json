@@ -152,13 +152,7 @@
                 "description": "Size of the virtual machine."
               }
             },
-          "dataDisk":{
-              "type": "string",
-              "metadata": {
-                "description": "Defines if addtitional dataDisks is required."
-              }
-          },
-          "dataDiskSize": {
+          "osDiskSize": {
               "type": "int",
               "metadata": {
                 "description": "Size of the DataDisk."
@@ -374,7 +368,7 @@
             "value": "[parameters('vmSize')]"
             },
           "osDiskSize": {
-            "value": "[parameters('dataDiskSize')]"
+            "value": "[parameters('osDiskSize')]"
           },
           "storageType": {
             "value": "[parameters('storageType')]"
