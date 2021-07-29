@@ -73,10 +73,8 @@
       }
     },
     "tagsByResource": {
-      "type": "object", 
-      "metadata": {
-        "description": "Tags choosen in the UIDefinition"
-      }
+      "type": "object",
+      "defaultValue": {}
     }
   },
   "resources": [
@@ -273,7 +271,7 @@
                 },
                 "licenseType": "Windows_Server"
               },
-              "tags": "[parameters('tagsByResource')]",
+              "tags": "[ if(contains(parameters('tagsByResource'), 'Microsoft.Compute/virtualMachines'), parameters('tagsByResource')['Microsoft.Compute/virtualMachines'], json('{}')) ]",
               "dependsOn": [
                 "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
               ]
