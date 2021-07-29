@@ -44,8 +44,8 @@
         }
     },
     "dataDiskSize": {
-        "type": "string",
-        "defaultValue": "100",
+        "type": "int",
+        "defaultValue": 100,
         "metadata": {
           "description": "Size of the DataDisk."
         }
@@ -165,7 +165,7 @@
               }
           },
           "dataDiskSize": {
-              "type": "string",
+              "type": "int",
               "metadata": {
                 "description": "Size of the DataDisk."
               }
