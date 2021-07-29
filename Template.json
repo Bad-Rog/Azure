@@ -38,18 +38,18 @@
       }
     },
     "osDiskSize": {
-        "type": "int",
-        "defaultValue": 127,
-        "metadata": {
-          "description": "Size of the DataDisk."
-        }
+      "type": "int",
+      "defaultValue": 127,
+      "metadata": {
+        "description": "Size of the DataDisk."
+      }
     },
     "storageType": {
-        "type": "string",
-        "defaultValue": "StandardSSD_LRS",
-        "metadata": {
-          "description": "Storagetype of the VM."
-        }
+      "type": "string",
+      "defaultValue": "StandardSSD_LRS",
+      "metadata": {
+        "description": "Storagetype of the VM."
+      }
     },
     "vnetResGroup": {
       "type": "string",
@@ -69,7 +69,7 @@
         "description": "Specifies the name of the Subnet within the virtual network hosting the virtual machine."
       }
     },
-    "galleryImageDefinitionName": {
+    "osName": {
       "type": "string",
       "allowedValues": [
         "Windows-2019",
@@ -152,18 +152,18 @@
                 "description": "Size of the virtual machine."
               }
             },
-          "osDiskSize": {
+            "osDiskSize": {
               "type": "int",
               "metadata": {
                 "description": "Size of the DataDisk."
               }
-          },
-          "storageType": {
+            },
+            "storageType": {
               "type": "string",
               "metadata": {
                 "description": "Storagetype of the VM."
               }
-          },
+            },
             "location": {
               "type": "string",
               "defaultValue": "[resourceGroup().location]",
@@ -196,7 +196,7 @@
                 "description": "Specifies the name of the Subnet within the virtual network hosting the virtual machine."
               }
             },
-            "galleryImageDefinitionName": {
+            "osName": {
               "type": "string",
               "allowedValues": [
                 "Windows-2019",
@@ -214,7 +214,7 @@
               }
             },
             "tagsByResource": {
-              "type": "object", 
+              "type": "object",
               "metadata": {
                 "description": "Tags choosen in the UIDefinition"
               }
@@ -272,7 +272,7 @@
                 },
                 "storageProfile": {
                   "imageReference": {
-                    "id": "[resourceId('2504977c-0e66-497d-b7eb-b4ee9877e355','SharedImageLibrary-RG', 'Microsoft.Compute/galleries/images/versions', 'Glencore', parameters('galleryImageDefinitionName'), parameters('galleryImageVersionName'))]"
+                    "id": "[resourceId('2504977c-0e66-497d-b7eb-b4ee9877e355','SharedImageLibrary-RG', 'Microsoft.Compute/galleries/images/versions', 'Glencore', parameters('osName'), parameters('galleryImageVersionName'))]"
                   },
                   "osDisk": {
                     "createOption": "FromImage",
@@ -282,17 +282,6 @@
                     },
                     "diskSizeGB": "[parameters('osDiskSize')]"
                   }
-                  //"dataDisks": [
-                    //{
-                      //"condition": "[equals(parameters('dataDisk'), 'Yes')]",
-                      //"diskSizeGB": "[parameters('dataDiskSize')]",
-                      //"lun": 0,
-                      //"createOption": "Empty",
-                      //"managedDisk": {
-                      //  "storageAccountType": "[parameters('storageType')]"
-                      //}
-                    //}
-                  //]
                 },
                 "networkProfile": {
                   "networkInterfaces": [
@@ -354,19 +343,18 @@
               ]
             }
           ],
-          "outputs": {
-          }
+          "outputs": {}
         },
         "parameters": {
           "vmName": {
             "value": "[toUpper(parameters('vmName'))]"
-            },
+          },
           "adminUsername": {
             "value": "[parameters('adminUsername')]"
-            },
+          },
           "vmSize": {
             "value": "[parameters('vmSize')]"
-            },
+          },
           "osDiskSize": {
             "value": "[parameters('osDiskSize')]"
           },
@@ -380,23 +368,23 @@
             "value": "[parameters('OUPath')]"
           },
           "vnetResGroup": {
-              "value": "[parameters('vnetResGroup')]"
+            "value": "[parameters('vnetResGroup')]"
           },
-            "vnetName": {
-              "value": "[parameters('vnetName')]"
-            },
-            "subnetName": {
-              "value": "[parameters('subnetName')]"
-            },
-            "galleryImageDefinitionName": {
-              "value": "[parameters('galleryImageDefinitionName')]"
-            },
-            "galleryImageVersionName": {
-              "value": "[parameters('galleryImageVersionName')]"
-            },
-            "tagsByResource": {
-              "value": "[parameters('tagsByResource')]"
-            },
+          "vnetName": {
+            "value": "[parameters('vnetName')]"
+          },
+          "subnetName": {
+            "value": "[parameters('subnetName')]"
+          },
+          "osName": {
+            "value": "[parameters('osName')]"
+          },
+          "galleryImageVersionName": {
+            "value": "[parameters('galleryImageVersionName')]"
+          },
+          "tagsByResource": {
+            "value": "[parameters('tagsByResource')]"
+          },
           "domainUser": {
             "reference": {
               "keyVault": {

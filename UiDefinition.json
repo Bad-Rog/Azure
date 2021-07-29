@@ -88,7 +88,7 @@
           "visible": true
         },
         {
-          "name": "galleryImageDefinitionName",
+          "name": "osName",
           "type": "Microsoft.Common.DropDown",
           "label": "Gallery Image Definition Name",
           "defaultValue": " ",
@@ -253,7 +253,7 @@
         "vnetResGroup": "[steps('networking').vnet.resourceGroup]",
         "subnetName": "[steps('networking').vnet.subnets.subnet1.name]",
         "tagsByResource": "[steps('tags').tagsByResource]",
-        "galleryImageDefinitionName": "[basics('galleryImageDefinitionName')]",
+        "osName": "[basics('osName')]",
         "galleryImageVersionName": "[basics('galleryImageVersionName')]"
       }
     }
