@@ -159,7 +159,7 @@
               }
             },
           "dataDisk":{
-              "type": "string",
+              "type": "bool",
               "metadata": {
                 "description": "Defines if addtitional dataDisks is required."
               }
