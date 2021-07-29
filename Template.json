@@ -296,7 +296,7 @@
                   },
                   "dataDisks": [
                     {
-                      "condition": "[equals(parameters('dataDisk'), 'true')]",
+                      "condition": "[equals(parameters('dataDisk'), 'Yes')]",
                       "diskSizeGB": "[parameters('dataDiskSize')]",
                       "lun": 0,
                       "createOption": "Empty",

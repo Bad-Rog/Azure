@@ -214,15 +214,27 @@
                   "required": true
                 },
                 "visible": true
-              },
-              {
-              "name": "dataDisk",
-              "type": "Microsoft.Common.CheckBox",
-              "label": "I require a additional Data Disk.",
-              "constraints": {
-                "required": false,
-                "validationMessage": "If ticked, an additional DataDisk will be provisioned."
-              }
+            },
+            {
+                "name": "dataDisk",
+                "type": "Microsoft.Common.OptionsGroup",
+                "label": "Additional DataDisk",
+                "defaultValue": "Yes",
+                "toolTip": "",
+                "constraints": {
+                  "allowedValues": [
+                    {
+                      "label": "Yes",
+                      "value": "Yes"
+                    },
+                    {
+                      "label": "No",
+                      "value": "No"
+                    }
+                  ],
+                  "required": true
+                },
+                "visible": true
             },
             {
               "name": "dataDiskSize",
