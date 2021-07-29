@@ -202,13 +202,8 @@
                     },
                     {
                       "label": "StandardSSD_ZRS",
-                      "description": "Best for web server, lightly used enterprise applications and dev/test taht need storage resiliency against zone failures.",
-                      "value": "StandardSSD_ZRS"
-                    },
-                    {
-                      "label": "PremiumSSD_ZRS",
-                      "description": "Best for production workloads that need storage resiliency against zone failures.",
-                      "value": "PremiumSSD_ZRS"
+                      "description": "Best for non-critical and infrequent access",
+                      "value": "StandardHDD_LRS"
                     }
                   ],
                   "required": true
