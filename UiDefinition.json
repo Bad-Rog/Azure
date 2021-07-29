@@ -232,7 +232,7 @@
               "label": "DataDisk",
               "subLabel": "GB",
               "defaultValue": 250,
-              "showStepMarkers": false,
+              "showStepMarkers": true,
               "toolTip": "Pick the size in GB",
               "constraints": {
                 "required": false

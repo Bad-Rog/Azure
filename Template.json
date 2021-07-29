@@ -38,7 +38,7 @@
       }
     },
     "dataDisk":{
-        "type": "bool",
+        "type": "string",
         "metadata": {
           "description": "Defines if addtitional dataDisks is required."
         }
@@ -159,7 +159,7 @@
               }
             },
           "dataDisk":{
-              "type": "bool",
+              "type": "string",
               "metadata": {
                 "description": "Defines if addtitional dataDisks is required."
               }
@@ -296,7 +296,7 @@
                   },
                   "dataDisks": [
                     {
-                      "condition": "[equals(parameters('dataDisk'), bool('true'))]",
+                      "condition": "[equals(parameters('dataDisk'), 'true')]",
                       "diskSizeGB": "[parameters('dataDiskSize')]",
                       "lun": 0,
                       "createOption": "Empty",
