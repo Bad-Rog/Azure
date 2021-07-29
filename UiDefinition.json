@@ -200,6 +200,7 @@
             "vnetName": "[steps('networking').vnet.name]",
             "vnetResGroup": "[steps('networking').vnet.resourceGroup]",
             "subnetName": "[steps('networking').vnet.subnets.subnet1.name]",
+            "tagsByResource": "[steps('tags').tagsByResource]",
             "galleryImageDefinitionName": "[basics('galleryImageDefinitionName')]",
             "galleryImageVersionName": "[basics('galleryImageVersionName')]"
         }
