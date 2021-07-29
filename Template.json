@@ -112,6 +112,13 @@
                 "description": "Password for the Virtual Machine."
               }
             },
+            "domainUser": {
+              "type": "secureString",
+              "minLength": 8,
+              "metadata": {
+                "description": "User to join domain"
+              }
+            },
             "domainPassword": {
               "type": "secureString",
               "minLength": 8,
@@ -302,7 +309,7 @@
                 "typeHandlerVersion": "1.3",
                 "autoUpgradeMinorVersion": true,
                 "settings": {
-                  "User": "anyaccess\\svc-bar-vmwarejoin",
+                  "User": "[parameters('domainUser')]",
                   "Restart": true,
                   "Name": "anyaccess.net",
                   "Options": "3",
@@ -358,6 +365,14 @@
             "tagsByResource": {
               "value": "[parameters('tagsByResource')]"
             },
+          "domainUser": {
+            "reference": {
+              "keyVault": {
+                "id": "/subscriptions/557dc8f3-20d6-4280-85c1-259bf85e7799/resourceGroups/GLBMGMTKeyVault-RG/providers/Microsoft.KeyVault/vaults/VMProvisioning"
+              },
+              "secretName": "GLBDomainJoin"
+            }
+          },
           "domainPassword": {
             "reference": {
               "keyVault": {
@@ -371,7 +386,7 @@
               "keyVault": {
                 "id": "/subscriptions/557dc8f3-20d6-4280-85c1-259bf85e7799/resourceGroups/GLBMGMTKeyVault-RG/providers/Microsoft.KeyVault/vaults/VMProvisioning"
               },
-              "secretName": "GLBDomainJoinPW"
+              "secretName": "GLBLocalAdmin"
             }
           }
         }
