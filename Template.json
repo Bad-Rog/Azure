@@ -37,15 +37,9 @@
         "description": "Name of the virtual machine."
       }
     },
-    "dataDisk":{
-        "type": "string",
-        "metadata": {
-          "description": "Defines if addtitional dataDisks is required."
-        }
-    },
-    "dataDiskSize": {
+    "osDiskSize": {
         "type": "int",
-        "defaultValue": 100,
+        "defaultValue": 127,
         "metadata": {
           "description": "Size of the DataDisk."
         }
@@ -292,19 +286,19 @@
                     "managedDisk": {
                       "storageAccountType": "[parameters('storageType')]"
                     },
-                    "diskSizeGB": 127
-                  },
-                  "dataDisks": [
-                    {
+                    "diskSizeGB": "[parameters('osDiskSize')]"
+                  }
+                  //"dataDisks": [
+                    //{
                       //"condition": "[equals(parameters('dataDisk'), 'Yes')]",
-                      "diskSizeGB": "[parameters('dataDiskSize')]",
-                      "lun": 0,
-                      "createOption": "Empty",
-                      "managedDisk": {
-                        "storageAccountType": "[parameters('storageType')]"
-                      }
-                    }
-                  ]
+                      //"diskSizeGB": "[parameters('dataDiskSize')]",
+                      //"lun": 0,
+                      //"createOption": "Empty",
+                      //"managedDisk": {
+                      //  "storageAccountType": "[parameters('storageType')]"
+                      //}
+                    //}
+                  //]
                 },
                 "networkProfile": {
                   "networkInterfaces": [
@@ -379,10 +373,7 @@
           "vmSize": {
             "value": "[parameters('vmSize')]"
             },
-          "dataDisk":{
-            "value": "[parameters('dataDisk')]"
-          },
-          "dataDiskSize": {
+          "osDiskSize": {
             "value": "[parameters('dataDiskSize')]"
           },
           "storageType": {

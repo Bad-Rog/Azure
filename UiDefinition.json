@@ -201,7 +201,7 @@
                       "value": "PremiumSSD_LRS"
                     },
                     {
-                      "label": "StandardSSD_ZRS",
+                      "label": "StandardHDD_LRS",
                       "description": "Best for non-critical and infrequent access",
                       "value": "StandardHDD_LRS"
                     }
@@ -211,34 +211,13 @@
                 "visible": true
             },
             {
-                "name": "dataDisk",
-                "type": "Microsoft.Common.OptionsGroup",
-                "label": "Additional DataDisk",
-                "defaultValue": "Yes",
-                "toolTip": "",
-                "constraints": {
-                  "allowedValues": [
-                    {
-                      "label": "Yes",
-                      "value": "Yes"
-                    },
-                    {
-                      "label": "No",
-                      "value": "No"
-                    }
-                  ],
-                  "required": true
-                },
-                "visible": true
-            },
-            {
-              "name": "dataDiskSize",
+              "name": "osDiskSize",
               "type": "Microsoft.Common.Slider",
-              "min": 100,
+              "min": 127,
               "max": 2000,
-              "label": "DataDisk",
+              "label": "OS Disk",
               "subLabel": "GB",
-              "defaultValue": 250,
+              "defaultValue": 127,
               "showStepMarkers": true,
               "toolTip": "Pick the size in GB",
               "constraints": {
@@ -268,8 +247,7 @@
         "vmSize": "[basics('vmSize')]",
         "location": "[location()]",
         "vmName": "[basics('vmName')]",
-        "dataDisk": "[steps('disk').dataDisk]",
-        "dataDiskSize": "[steps('disk').dataDiskSize]",
+        "osDiskSize": "[steps('disk').osDiskSize]",
         "storageType": "[steps('disk').storageType]",
         "vnetName": "[steps('networking').vnet.name]",
         "vnetResGroup": "[steps('networking').vnet.resourceGroup]",
