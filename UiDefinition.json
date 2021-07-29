@@ -198,12 +198,12 @@
                     {
                       "label": "PremiumSSD_LRS",
                       "description": "Best for production and performance sensitive workloads.",
-                      "value": "PremiumSSD_LRS"
+                      "value": "Premium_LRS"
                     },
                     {
                       "label": "StandardHDD_LRS",
                       "description": "Best for non-critical and infrequent access",
-                      "value": "StandardHDD_LRS"
+                      "value": "Standard_LRS"
                     }
                   ],
                   "required": true
