@@ -175,7 +175,21 @@
                         "visible": true
                     }
                 ]
+            },
+            {
+                "name": "tags",
+                "label": "Tags",
+                "elements": [
+                    {
+                        "name": "tagsByResource",
+                        "type": "Microsoft.Common.TagsByResource",
+                        "resources": [
+                            "Microsoft.Compute/virtualMachines"
+                        ]
+                    }
+                ]
             }
+
 		],
         "outputs": {
             "adminUsername": "[basics('adminUsername')]",
