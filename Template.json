@@ -325,15 +325,11 @@
             }
           ],
           "outputs": {
-            "hostname": {
-              "type": "string",
-              "value": "helloWorld"
-            }
           }
         },
         "parameters": {
           "vmName": {
-            "value": "[parameters('vmName')]"
+            "value": "[toUpper(parameters('vmName'))]"
             },
           "adminUsername": {
             "value": "[parameters('adminUsername')]"
