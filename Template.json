@@ -37,6 +37,26 @@
         "description": "Name of the virtual machine."
       }
     },
+    "dataDisk":{
+        "type": "bool",
+        "metadata": {
+          "description": "Defines if addtitional dataDisks is required."
+        }
+    },
+    "dataDiskSize": {
+        "type": "int",
+        "defaultValue": "100",
+        "metadata": {
+          "description": "Size of the DataDisk."
+        }
+    },
+    "storageType": {
+        "type": "string",
+        "defaultValue": "StandardSSD_LRS",
+        "metadata": {
+          "description": "Storagetype of the VM."
+        }
+    },
     "vnetResGroup": {
       "type": "string",
       "metadata": {
@@ -138,6 +158,24 @@
                 "description": "Size of the virtual machine."
               }
             },
+          "dataDisk":{
+              "type": "string",
+              "metadata": {
+                "description": "Defines if addtitional dataDisks is required."
+              }
+          },
+          "dataDiskSize": {
+              "type": "string",
+              "metadata": {
+                "description": "Size of the DataDisk."
+              }
+          },
+          "storageType": {
+              "type": "string",
+              "metadata": {
+                "description": "Storagetype of the VM."
+              }
+          },
             "location": {
               "type": "string",
               "defaultValue": "[resourceGroup().location]",
@@ -252,17 +290,18 @@
                     "createOption": "FromImage",
                     "caching": "ReadWrite",
                     "managedDisk": {
-                      "storageAccountType": "StandardSSD_LRS"
+                      "storageAccountType": "[parameters('storageType')]"
                     },
                     "diskSizeGB": 127
                   },
                   "dataDisks": [
                     {
-                      "diskSizeGB": 1023,
+                      "condition": "[equals(parameters('dataDisk'), bool('true'))]",
+                      "diskSizeGB": "[parameters('dataDiskSize')]",
                       "lun": 0,
                       "createOption": "Empty",
                       "managedDisk": {
-                        "storageAccountType": "StandardSSD_LRS"
+                        "storageAccountType": "[parameters('storageType')]"
                       }
                     }
                   ]
@@ -340,6 +379,15 @@
           "vmSize": {
             "value": "[parameters('vmSize')]"
             },
+          "dataDisk":{
+            "value": "[parameters('dataDisk')]"
+          },
+          "dataDiskSize": {
+            "value": "[parameters('dataDiskSize')]"
+          },
+          "storageType": {
+            "value": "[parameters('storageType')]"
+          },
           "location": {
             "value": "[parameters('location')]"
           },
