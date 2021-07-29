@@ -91,7 +91,7 @@
           "name": "osName",
           "type": "Microsoft.Common.DropDown",
           "label": "Gallery Image Definition Name",
-          "defaultValue": " ",
+          "defaultValue": "Windows-2019",
           "toolTip": "Operating System",
           "constraints": {
             "required": true,
