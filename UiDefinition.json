@@ -154,7 +154,7 @@
         "visible": true
       },
       {
-        "name": "galleryImageVersionName",
+        "name": "imageVersion",
         "type": "Microsoft.Common.TextBox",
         "label": "Image Version",
         "defaultValue": "latest",
@@ -309,7 +309,7 @@
       "subnetName": "[steps('networking').vnet.subnets.subnet1.name]",
       "tagsByResource": "[steps('tags').tagsByResource]",
       "osName": "[basics('osName')]",
-      "galleryImageVersionName": "[basics('galleryImageVersionName')]"
+      "imageVersion": "[basics('imageVersion')]"
     }
   }
 }

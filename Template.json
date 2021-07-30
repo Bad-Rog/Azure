@@ -71,6 +71,7 @@
     },
     "osName": {
       "type": "string",
+      "defaultValue": "Windows-2019",
       "allowedValues": [
         "Windows-2019",
         "UbuntuServer-20.04"
@@ -79,7 +80,7 @@
         "description": "Operating System"
       }
     },
-    "galleryImageVersionName": {
+    "imageVersion": {
       "type": "string",
       "defaultValue": "latest",
       "metadata": {
@@ -206,7 +207,7 @@
                 "description": "Operating System"
               }
             },
-            "galleryImageVersionName": {
+            "imageVersion": {
               "type": "string",
               "defaultValue": "latest",
               "metadata": {
@@ -272,7 +273,7 @@
                 },
                 "storageProfile": {
                   "imageReference": {
-                    "id": "[resourceId('2504977c-0e66-497d-b7eb-b4ee9877e355','SharedImageLibrary-RG', 'Microsoft.Compute/galleries/images/versions', 'Glencore', parameters('osName'), parameters('galleryImageVersionName'))]"
+                    "id": "[resourceId('2504977c-0e66-497d-b7eb-b4ee9877e355','SharedImageLibrary-RG', 'Microsoft.Compute/galleries/images/versions', 'Glencore', parameters('osName'), parameters('imageVersion'))]"
                   },
                   "osDisk": {
                     "createOption": "FromImage",
@@ -343,7 +344,12 @@
               ]
             }
           ],
-          "outputs": {}
+          "outputs": {
+            "networkInterface":{
+            "value": "[reference(resourceId('Microsoft.Network/networkInterfaces', variables('nicName')),'2016-09-01').ipConfigurations[0].properties.privateIPAddress]",
+            "type": "string"
+            }            
+          }
         },
         "parameters": {
           "vmName": {
@@ -379,8 +385,8 @@
           "osName": {
             "value": "[parameters('osName')]"
           },
-          "galleryImageVersionName": {
-            "value": "[parameters('galleryImageVersionName')]"
+          "imageVersion": {
+            "value": "[parameters('imageVersion')]"
           },
           "tagsByResource": {
             "value": "[parameters('tagsByResource')]"
@@ -413,5 +419,10 @@
       }
     }
   ],
-  "outputs": {}
+  "outputs": {
+    "nameVM": {
+      "type": "string",
+      "value": "[parameters('vmName')]"
+    }
+  }
 }
