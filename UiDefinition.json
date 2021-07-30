@@ -32,7 +32,7 @@
           "constraints": {
             "validations": [
               {
-                "isValid": "[not(contains(resourceGroup().name, 'test'))]",
+                "isValid": "[not(contains(resourceGroup().name, 'testscenario'))]",
                 "message": "Resource group name can't contain 'test'."
               }
             ]
