@@ -75,7 +75,7 @@
         "type": "Microsoft.Common.TextBox",
         "label": "OU Path",
         "defaultValue": "OU=Member Servers,OU=Baar,OU=Europe,DC=ANYACCESS,DC=NET",
-        "toolTip": "Password to join domain",
+        "toolTip": "FQDN to the OU this VM should be place in",
         "constraints": {
           "required": false,
           "regex": ".{8,}$",
@@ -139,7 +139,7 @@
       {
         "name": "osName",
         "type": "Microsoft.Common.DropDown",
-        "label": "Gallery Image Definition Name",
+        "label": "Operating System",
         "defaultValue": "Windows-2019",
         "toolTip": "Operating System",
         "constraints": {
@@ -156,9 +156,9 @@
       {
         "name": "galleryImageVersionName",
         "type": "Microsoft.Common.TextBox",
-        "label": "Gallery Image Version Name",
+        "label": "Image Version",
         "defaultValue": "latest",
-        "toolTip": "Choose specific image version. Defaul is latest",
+        "toolTip": "Choose specific image version. Default is latest",
         "constraints": {
           "required": true
         },
