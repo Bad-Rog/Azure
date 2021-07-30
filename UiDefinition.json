@@ -148,10 +148,6 @@
             {
               "label": "Windows-2019",
               "value": "Windows-2019"
-            },
-            {
-              "label": "UbuntuServer-20.04",
-              "value": "UbuntuServer-20.04"
             }
           ]
         },
