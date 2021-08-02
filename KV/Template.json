@@ -37,6 +37,20 @@
         "description": "Name of the virtual machine."
       }
     },
+    "osDiskSize": {
+      "type": "int",
+      "defaultValue": 127,
+      "metadata": {
+        "description": "Size of the DataDisk."
+      }
+    },
+    "storageType": {
+      "type": "string",
+      "defaultValue": "StandardSSD_LRS",
+      "metadata": {
+        "description": "Storagetype of the VM."
+      }
+    },
     "vnetResGroup": {
       "type": "string",
       "metadata": {
@@ -55,8 +69,9 @@
         "description": "Specifies the name of the Subnet within the virtual network hosting the virtual machine."
       }
     },
-    "galleryImageDefinitionName": {
+    "osName": {
       "type": "string",
+      "defaultValue": "Windows-2019",
       "allowedValues": [
         "Windows-2019",
         "UbuntuServer-20.04"
@@ -65,19 +80,23 @@
         "description": "Operating System"
       }
     },
-    "galleryImageVersionName": {
+    "imageVersion": {
       "type": "string",
       "defaultValue": "latest",
       "metadata": {
         "description": "Choose specific image version. Defaul is latest"
       }
+    },
+    "tagsByResource": {
+      "type": "object",
+      "defaultValue": {}
     }
   },
   "resources": [
     {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2020-10-01",
-      "name": "dynamicSecret",
+      "name": "KeyVault-VMDeployment",
       "properties": {
         "mode": "Incremental",
         "expressionEvaluationOptions": {
@@ -108,6 +127,13 @@
                 "description": "Password for the Virtual Machine."
               }
             },
+            "domainUser": {
+              "type": "secureString",
+              "minLength": 8,
+              "metadata": {
+                "description": "User to join domain"
+              }
+            },
             "domainPassword": {
               "type": "secureString",
               "minLength": 8,
@@ -117,16 +143,26 @@
             },
             "OUPath": {
               "type": "String",
-              "defaultValue": "OU=Member Servers,OU=Baar,OU=Europe,DC=ANYACCESS,DC=NET",
               "metadata": {
-                "description": "Password to join domain"
+                "description": "OU the server will be joined into"
               }
             },
             "vmSize": {
               "type": "string",
-              "defaultValue": "Standard_B2s",
               "metadata": {
                 "description": "Size of the virtual machine."
+              }
+            },
+            "osDiskSize": {
+              "type": "int",
+              "metadata": {
+                "description": "Size of the DataDisk."
+              }
+            },
+            "storageType": {
+              "type": "string",
+              "metadata": {
+                "description": "Storagetype of the VM."
               }
             },
             "location": {
@@ -161,7 +197,7 @@
                 "description": "Specifies the name of the Subnet within the virtual network hosting the virtual machine."
               }
             },
-            "galleryImageDefinitionName": {
+            "osName": {
               "type": "string",
               "allowedValues": [
                 "Windows-2019",
@@ -171,11 +207,17 @@
                 "description": "Operating System"
               }
             },
-            "galleryImageVersionName": {
+            "imageVersion": {
               "type": "string",
               "defaultValue": "latest",
               "metadata": {
                 "description": "Choose specific image version. Defaul is latest"
+              }
+            },
+            "tagsByResource": {
+              "type": "object",
+              "metadata": {
+                "description": "Tags choosen in the UIDefinition"
               }
             }
           },
@@ -231,23 +273,16 @@
                 },
                 "storageProfile": {
                   "imageReference": {
-                    "id": "[resourceId('2504977c-0e66-497d-b7eb-b4ee9877e355','SharedImageLibrary-RG', 'Microsoft.Compute/galleries/images/versions', 'Glencore', parameters('galleryImageDefinitionName'), parameters('galleryImageVersionName'))]"
+                    "id": "[resourceId('2504977c-0e66-497d-b7eb-b4ee9877e355','SharedImageLibrary-RG', 'Microsoft.Compute/galleries/images/versions', 'Glencore', parameters('osName'), parameters('imageVersion'))]"
                   },
                   "osDisk": {
                     "createOption": "FromImage",
                     "caching": "ReadWrite",
                     "managedDisk": {
-                      "storageAccountType": "StandardSSD_LRS"
+                      "storageAccountType": "[parameters('storageType')]"
                     },
-                    "diskSizeGB": 127
-                  },
-                  "dataDisks": [
-                    {
-                      "diskSizeGB": 1023,
-                      "lun": 0,
-                      "createOption": "Empty"
-                    }
-                  ]
+                    "diskSizeGB": "[parameters('osDiskSize')]"
+                  }
                 },
                 "networkProfile": {
                   "networkInterfaces": [
@@ -263,6 +298,7 @@
                 },
                 "licenseType": "Windows_Server"
               },
+              "tags": "[ if(contains(parameters('tagsByResource'), 'Microsoft.Compute/virtualMachines'), parameters('tagsByResource')['Microsoft.Compute/virtualMachines'], json('{}')) ]",
               "dependsOn": [
                 "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
               ]
@@ -293,7 +329,7 @@
                 "typeHandlerVersion": "1.3",
                 "autoUpgradeMinorVersion": true,
                 "settings": {
-                  "User": "anyaccess\\svc-bar-vmwarejoin",
+                  "User": "[parameters('domainUser')]",
                   "Restart": true,
                   "Name": "anyaccess.net",
                   "Options": "3",
@@ -309,34 +345,60 @@
             }
           ],
           "outputs": {
-            "hostname": {
-              "type": "string",
-              "value": "helloWorld"
-            }
+            "networkInterface":{
+            "value": "[reference(resourceId('Microsoft.Network/networkInterfaces', variables('nicName')),'2016-09-01').ipConfigurations[0].properties.privateIPAddress]",
+            "type": "string"
+            }            
           }
         },
         "parameters": {
           "vmName": {
-            "value": "[parameters('vmName')]"
-            },
+            "value": "[toUpper(parameters('vmName'))]"
+          },
+          "adminUsername": {
+            "value": "[parameters('adminUsername')]"
+          },
+          "vmSize": {
+            "value": "[parameters('vmSize')]"
+          },
+          "osDiskSize": {
+            "value": "[parameters('osDiskSize')]"
+          },
+          "storageType": {
+            "value": "[parameters('storageType')]"
+          },
           "location": {
             "value": "[parameters('location')]"
           },
-          "vnetResGroup": {
-              "value": "[parameters('vnetResGroup')]"
+          "OUPath": {
+            "value": "[parameters('OUPath')]"
           },
-            "vnetName": {
-              "value": "[parameters('vnetName')]"
-            },
-            "subnetName": {
-              "value": "[parameters('subnetName')]"
-            },
-            "galleryImageDefinitionName": {
-              "value": "[parameters('galleryImageDefinitionName')]"
-            },
-            "galleryImageVersionName": {
-              "value": "[parameters('galleryImageVersionName')]"
-            },
+          "vnetResGroup": {
+            "value": "[parameters('vnetResGroup')]"
+          },
+          "vnetName": {
+            "value": "[parameters('vnetName')]"
+          },
+          "subnetName": {
+            "value": "[parameters('subnetName')]"
+          },
+          "osName": {
+            "value": "[parameters('osName')]"
+          },
+          "imageVersion": {
+            "value": "[parameters('imageVersion')]"
+          },
+          "tagsByResource": {
+            "value": "[parameters('tagsByResource')]"
+          },
+          "domainUser": {
+            "reference": {
+              "keyVault": {
+                "id": "/subscriptions/557dc8f3-20d6-4280-85c1-259bf85e7799/resourceGroups/GLBMGMTKeyVault-RG/providers/Microsoft.KeyVault/vaults/VMProvisioning"
+              },
+              "secretName": "GLBDomainJoin"
+            }
+          },
           "domainPassword": {
             "reference": {
               "keyVault": {
@@ -350,12 +412,17 @@
               "keyVault": {
                 "id": "/subscriptions/557dc8f3-20d6-4280-85c1-259bf85e7799/resourceGroups/GLBMGMTKeyVault-RG/providers/Microsoft.KeyVault/vaults/VMProvisioning"
               },
-              "secretName": "GLBDomainJoinPW"
+              "secretName": "GLBLocalAdmin"
             }
           }
         }
       }
     }
   ],
-  "outputs": {}
+  "outputs": {
+    "nameVM": {
+      "type": "string",
+      "value": "[parameters('vmName')]"
+    }
+  }
 }
