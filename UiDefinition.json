@@ -71,6 +71,24 @@
         "visible": true
       },
       {
+        "name": "adminPassword",
+        "type": "Microsoft.Common.PasswordBox",
+        "label": {
+          "password": "Password",
+          "confirmPassword": "Confirm password"
+        },
+        "toolTip": "Local Admin PW",
+        "constraints": {
+          "required": true,
+          "regex": "^[a-zA-Z0-9]{8,}$",
+          "validationMessage": "Password must be at least 8 characters long, contain only numbers and letters"
+        },
+        "options": {
+          "hideConfirmation": true
+        },
+        "visible": true
+      },     
+      {
         "name": "OUPath",
         "type": "Microsoft.Common.TextBox",
         "label": "OU Path",
@@ -298,6 +316,7 @@
     ],
     "outputs": {
       "adminUsername": "[basics('adminUsername')]",
+      "adminPassword": "[basics('adminPassword')]",
       "OUPath": "[basics('OUPath')]",
       "vmSize": "[basics('vmSize')]",
       "location": "[location()]",
