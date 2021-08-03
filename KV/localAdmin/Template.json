@@ -16,6 +16,13 @@
         "description": "Username for the Virtual Machine."
       }
     },
+    "adminPassword": {
+      "type": "secureString",
+      "minLength": 12,
+      "metadata": {
+        "description": "Password for the Virtual Machine."
+      }
+    },
     "OUPath": {
       "type": "String",
       "defaultValue": "OU=Member Servers,OU=Baar,OU=Europe,DC=ANYACCESS,DC=NET",
@@ -408,12 +415,7 @@
             }
           },
           "adminPassword": {
-            "reference": {
-              "keyVault": {
-                "id": "/subscriptions/557dc8f3-20d6-4280-85c1-259bf85e7799/resourceGroups/GLBMGMTKeyVault-RG/providers/Microsoft.KeyVault/vaults/VMProvisioning"
-              },
-              "secretName": "GLBLocalAdmin"
-            }
+            "value": "[parameters('adminPassword')]"
           }
         }
       }
