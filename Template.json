@@ -89,7 +89,7 @@
       "defaultValue": "[utcNow('yyyy-MM-dd')]"
     }
   },
-
+  
   "variables": {
     "deploymentName": "[concat('VMDeployment-', parameters('timeStamp'))]"
   },
