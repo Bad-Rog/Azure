@@ -83,10 +83,15 @@
     "tagsByResource": {
       "type": "object",
       "defaultValue": {}
+    },
+    "timeStamp": {
+      "type": "string",
+      "defaultValue": "[utcNow('yyyy-MM-dd')]"
     }
   },
+
   "variables": {
-    "deploymentName": "[concat('VMDeployment-', utcNow('yyyy-MM-dd'))]"
+    "deploymentName": "[concat('VMDeployment-', parameters('timeStamp'))]"
   },
   "resources": [
     {
