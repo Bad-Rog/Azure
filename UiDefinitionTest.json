@@ -136,7 +136,6 @@
           "multiline": false,
           "constraints": {
             "required": true,
-            "regex": "^(DEAZT|DEAZ1|CAAZ1|GBAZ1)[a-zA-Z]{3}[0-9]{1}[a-zA-Z0-9]{2,4}[PpTtDd][0-9]$",
             "validationMessage": "Please use a VM naming that adheres to the Global Naming Standard. Eg: CHBARSRV7XXXXP1. GNS can be found here: https://globalit.glencore.net/global-it-operations/Pages/Standards-and-requirements.aspx"
           },
           "visible": true

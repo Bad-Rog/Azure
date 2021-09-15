@@ -38,6 +38,19 @@
             ]
           },
           "allowExisting": true
+        },
+        "location": {
+          "label": "Glencore Approved Regions",
+          "toolTip": "You can only deploy into approved Regions",
+          "resourceTypes": [
+            "Microsoft.Compute/virtualMachines"
+          ],
+          "allowedValues": [
+            "germanywestcentral",
+            "uksouth",
+            "canadacentral"
+          ],
+          "visible": true
         }
       }
     },
@@ -100,30 +113,12 @@
       },
       {
         "name": "location",
-        "type": "Microsoft.Common.DropDown",
+        "type": "Microsoft.Common.TextBox",
         "label": "Location",
-        "defaultValue": "Same as ResourceGroup",
-        "toolTip": "Location for resource.",
+        "defaultValue": "[[resourceGroup().location]",
+        "toolTip": "Location for all resources.",
         "constraints": {
-          "required": true,
-          "allowedValues": [
-            {
-              "label": "Same as ResourceGroup",
-              "value": "[[resourceGroup().location]"
-            },
-            {
-              "label": "Germany West Central",
-              "value": "germanywestcentral"
-            },
-            {
-              "label": "UK South",
-              "value": "uksouth"
-            },
-            {
-              "label": "Canada Central",
-              "value": "canadacentral"
-            }
-          ]
+          "required": true
         },
         "visible": true
       },
@@ -305,7 +300,7 @@
       "adminUsername": "[basics('adminUsername')]",
       "OUPath": "[basics('OUPath')]",
       "vmSize": "[basics('vmSize')]",
-      "location": "[basics('location')]",
+      "location": "[location()]",
       "vmName": "[basics('vmName')]",
       "osDiskSize": "[steps('disk').osDiskSize]",
       "storageType": "[steps('disk').storageType]",
