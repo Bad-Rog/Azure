@@ -112,6 +112,35 @@
         "visible": true
       },
       {
+        "name": "location",
+        "type": "Microsoft.Common.DropDown",
+        "label": "Location",
+        "defaultValue": "[[resourceGroup().location]",
+        "toolTip": "Location for resource.",
+        "constraints": {
+          "required": true,
+          "allowedValues": [
+            {
+              "label": "Same as ResourceGroup",
+              "value": "[[resourceGroup().location]"
+            },
+            {
+              "label": "Germany West Central",
+              "value": "germanywestcentral"
+            },
+            {
+              "label": "UK South",
+              "value": "uksouth"
+            },
+            {
+              "label": "Canada Central",
+              "value": "canadacentral"
+            }
+          ]
+        },
+        "visible": true
+      },
+      {
         "name": "vmName",
         "type": "Microsoft.Common.TextBox",
         "label": "Vm Name",
@@ -289,7 +318,7 @@
       "adminUsername": "[basics('adminUsername')]",
       "OUPath": "[basics('OUPath')]",
       "vmSize": "[basics('vmSize')]",
-      "location": "[location()]",
+      "location": "[basics('location']",
       "vmName": "[basics('vmName')]",
       "osDiskSize": "[steps('disk').osDiskSize]",
       "storageType": "[steps('disk').storageType]",
