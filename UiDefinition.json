@@ -112,17 +112,6 @@
         "visible": true
       },
       {
-        "name": "location",
-        "type": "Microsoft.Common.TextBox",
-        "label": "Location",
-        "defaultValue": "[[resourceGroup().location]",
-        "toolTip": "Location for all resources.",
-        "constraints": {
-          "required": true
-        },
-        "visible": true
-      },
-      {
         "name": "vmName",
         "type": "Microsoft.Common.TextBox",
         "label": "Vm Name",
