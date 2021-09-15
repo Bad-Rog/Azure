@@ -38,19 +38,6 @@
             ]
           },
           "allowExisting": true
-        },
-        "location": {
-          "label": "Glencore Approved Regions",
-          "toolTip": "You can only deploy into approved Regions",
-          "resourceTypes": [
-            "Microsoft.Compute/virtualMachines"
-          ],
-          "allowedValues": [
-            "germanywestcentral",
-            "uksouth",
-            "canadacentral"
-          ],
-          "visible": true
         }
       }
     },
@@ -115,7 +102,7 @@
         "name": "location",
         "type": "Microsoft.Common.DropDown",
         "label": "Location",
-        "defaultValue": "[[resourceGroup().location]",
+        "defaultValue": "Same as ResourceGroup",
         "toolTip": "Location for resource.",
         "constraints": {
           "required": true,
