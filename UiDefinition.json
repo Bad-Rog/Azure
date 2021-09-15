@@ -305,7 +305,7 @@
       "adminUsername": "[basics('adminUsername')]",
       "OUPath": "[basics('OUPath')]",
       "vmSize": "[basics('vmSize')]",
-      "location": "[basics('location']",
+      "location": "[basics('location')]",
       "vmName": "[basics('vmName')]",
       "osDiskSize": "[steps('disk').osDiskSize]",
       "storageType": "[steps('disk').storageType]",
