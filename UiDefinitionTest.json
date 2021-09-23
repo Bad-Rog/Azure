@@ -58,6 +58,34 @@
         "visible": false
       },
       {
+        "name": "vmName",
+        "type": "Microsoft.Common.TextBox",
+        "label": "Vm Name",
+        "defaultValue": "DEAZTSRV9",
+        "toolTip": "Name of the virtual machine.",
+        "multiline": false,
+        "constraints": {
+          "required": true,
+          "regex": "^(DEAZT|DEAZ1|CAAZ1|GBAZ1)[a-zA-Z]{3}[0-9]{1}[a-zA-Z0-9]{2,4}[PpTtDd][0-9]$",
+          "validationMessage": "Please use a VM naming that adheres to the Global Naming Standard. Eg: CHBARSRV7XXXXP1. GNS can be found here: https://globalit.glencore.net/global-it-operations/Pages/Standards-and-requirements.aspx"
+        },
+        "visible": true
+      },
+      {
+        "name": "eMail",
+        "type": "Microsoft.Common.TextBox",
+        "label": "Owner eMail Address",
+        "defaultValue": "DEAZTSRV9",
+        "toolTip": "Add a valid EMail Address of the Responsible Team of this Server",
+        "multiline": false,
+        "constraints": {
+          "required": true,
+          "regex": "^\\S+@\\S+\\.\\S+$",
+          "validationMessage": "Please use a valid EmailAddress"
+        },
+        "visible": true
+      },
+      {
         "name": "OUPath",
         "type": "Microsoft.Common.TextBox",
         "label": "OU Path",
@@ -119,20 +147,6 @@
 				}
           ],
           "required": true
-        },
-        "visible": true
-      },
-      {
-        "name": "vmName",
-        "type": "Microsoft.Common.TextBox",
-        "label": "Vm Name",
-        "defaultValue": "DEAZTSRV9",
-        "toolTip": "Name of the virtual machine.",
-        "multiline": false,
-        "constraints": {
-          "required": true,
-          "regex": "^(DEAZT|DEAZ1|CAAZ1|GBAZ1)[a-zA-Z]{3}[0-9]{1}[a-zA-Z0-9]{2,4}[PpTtDd][0-9]$",
-          "validationMessage": "Please use a VM naming that adheres to the Global Naming Standard. Eg: CHBARSRV7XXXXP1. GNS can be found here: https://globalit.glencore.net/global-it-operations/Pages/Standards-and-requirements.aspx"
         },
         "visible": true
       },
@@ -302,6 +316,7 @@
       "vmSize": "[basics('vmSize')]",
       "location": "[basics('location')]",
       "vmName": "[basics('vmName')]",
+      "eMail": "[basics('eMail')]",
       "osDiskSize": "[steps('disk').osDiskSize]",
       "storageType": "[steps('disk').storageType]",
       "vnetName": "[steps('networking').vnet.name]",
