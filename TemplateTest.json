@@ -90,16 +90,21 @@
     "tagsByResource": {
       "type": "object",
       "defaultValue": {}
+    },
+    "timeStamp": {
+      "type": "string",
+      "defaultValue": "[utcNow('u')]"
     }
   },
 
   "variables": {
+    "deploymentName": "[concat('Deploy-', uniqueString(parameters('timeStamp')))]"
   },
   "resources": [
     {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2020-10-01",
-      "name": "[concat('Deploy-', parameters('vmName'), uniqueString(parameters('vmName')))]",
+      "name": "[variables('deploymentName')]",
       "properties": {
         "mode": "Incremental",
         "expressionEvaluationOptions": {
