@@ -75,7 +75,7 @@
         "name": "eMail",
         "type": "Microsoft.Common.TextBox",
         "label": "Owner eMail Address",
-        "defaultValue": "DEAZTSRV9",
+        "defaultValue": "user@company.com",
         "toolTip": "Add a valid EMail Address of the Responsible Team of this Server",
         "multiline": false,
         "constraints": {
