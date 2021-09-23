@@ -121,6 +121,20 @@
             }
           },
           "parameters": {
+            "vmName": {
+              "type": "string",
+              "defaultValue": "DEAZTSRV9",
+              "metadata": {
+                "description": "Name of the virtual machine."
+              }
+            },
+            "eMail": {
+              "type": "string",
+              "defaultValue": "baar.it.vm@glencore.com",
+              "metadata": {
+                "description": "Email of the Responsible Team."
+              }
+            },            
             "adminUsername": {
               "type": "string",
               "defaultValue": "vmadmin",
@@ -178,13 +192,6 @@
               "defaultValue": "[resourceGroup().location]",
               "metadata": {
                 "description": "Location for all resources."
-              }
-            },
-            "vmName": {
-              "type": "string",
-              "defaultValue": "DEAZTSRV9",
-              "metadata": {
-                "description": "Name of the virtual machine."
               }
             },
             "vnetResGroup": {
@@ -362,6 +369,9 @@
         "parameters": {
           "vmName": {
             "value": "[toUpper(parameters('vmName'))]"
+          },
+          "eMail": {
+            "value": "[parameters('eMail')]"
           },
           "vmSize": {
             "value": "[parameters('vmSize')]"
