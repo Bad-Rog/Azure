@@ -94,13 +94,12 @@
   },
 
   "variables": {
-    "deploymentName": "[concat('Deploy-', parameters('vmName'), uniqueString(parameters('vmName')))]"
   },
   "resources": [
     {
       "type": "Microsoft.Resources/deployments",
       "apiVersion": "2020-10-01",
-      "name": "[variables('deploymentName')]",
+      "name": "[concat('Deploy-', parameters('vmName'), uniqueString(parameters('vmName')))]",
       "properties": {
         "mode": "Incremental",
         "expressionEvaluationOptions": {
