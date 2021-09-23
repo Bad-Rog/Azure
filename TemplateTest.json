@@ -371,7 +371,7 @@
             "value": "[toUpper(parameters('vmName'))]"
           },
           "eMail": {
-            "value": "[parameters('eMail')]"
+            "value": "[toLower(parameters('eMail'))]"
           },
           "vmSize": {
             "value": "[parameters('vmSize')]"
