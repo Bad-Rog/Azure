@@ -1,5 +1,5 @@
 {
-    "$schema": "<relative path to uiFormDefinition.schema.json>",
+    "$schema": "https://schema.management.azure.com/schemas/0.1.2-preview/CreateUIDefinition.MultiVm.json#",
     "view": {
         "kind": "Form",
         "properties": {

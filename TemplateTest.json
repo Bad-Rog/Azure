@@ -313,7 +313,7 @@
                 },
                 "licenseType": "Windows_Server"
               },
-              "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Compute/virtualMachines'), union(parameters('tagsByResource')['Microsoft.Compute/virtualMachines'], json(concat('{\"eMail\":\"', parameters('eMail'), '\"}'))), json(concat('{\"eMail\":\"', parameters('eMail'), '\"}')))]",
+              "tags": "[if(contains(parameters('tagsByResource'), 'Microsoft.Compute/virtualMachines'), union(parameters('tagsByResource')['Microsoft.Compute/virtualMachines'], json(concat('{\"Owner\":\"', parameters('eMail'), '\"}'))), json(concat('{\"Owner\":\"', parameters('eMail'), '\"}')))]",
               "dependsOn": [
                 "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
               ]
