@@ -1,0 +1,426 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "The location where the resources will be deployed."
+      }
+    },
+    "OUPath": {
+      "type": "String",
+      "defaultValue": "OU=Member Servers,OU=Baar,OU=Europe,DC=ANYACCESS,DC=NET",
+      "metadata": {
+        "description": "Password to join domain"
+      }
+    },
+    "vmSize": {
+      "type": "string",
+      "defaultValue": "Standard_B2s",
+      "metadata": {
+        "description": "Size of the virtual machine."
+      }
+    },
+    "vmName": {
+      "type": "string",
+      "defaultValue": "DEAZTSRV9",
+      "metadata": {
+        "description": "Name of the virtual machine."
+      }
+    },
+    "osDiskSize": {
+      "type": "int",
+      "defaultValue": 127,
+      "metadata": {
+        "description": "Size of the DataDisk."
+      }
+    },
+    "storageType": {
+      "type": "string",
+      "defaultValue": "StandardSSD_LRS",
+      "metadata": {
+        "description": "Storagetype of the VM."
+      }
+    },
+    "vnetResGroup": {
+      "type": "string",
+      "metadata": {
+        "description": "Specifies the name of the ResourceGroup of the virtual network hosting the virtual machine."
+      }
+    },
+    "vnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "Specifies the name of the virtual network hosting the virtual machine."
+      }
+    },
+    "subnetName": {
+      "type": "string",
+      "metadata": {
+        "description": "Specifies the name of the Subnet within the virtual network hosting the virtual machine."
+      }
+    },
+    "osName": {
+      "type": "string",
+      "defaultValue": "Windows-2019",
+      "allowedValues": [
+        "Windows-2019",
+        "UbuntuServer-20.04"
+      ],
+      "metadata": {
+        "description": "Operating System"
+      }
+    },
+    "imageVersion": {
+      "type": "string",
+      "defaultValue": "latest",
+      "metadata": {
+        "description": "Choose specific image version. Defaul is latest"
+      }
+    },
+    "tagsByResource": {
+      "type": "object",
+      "defaultValue": {}
+    },
+    "timeStamp": {
+      "type": "string",
+      "defaultValue": "[utcNow('u')]"
+    }
+  },
+
+  "variables": {
+    "deploymentName": "[concat('VMDeployment-', uniqueString(parameters('timeStamp')))]"
+  },
+  "resources": [
+    {
+      "type": "Microsoft.Resources/deployments",
+      "apiVersion": "2020-10-01",
+      "name": "[variables('deploymentName')]",
+      "properties": {
+        "mode": "Incremental",
+        "expressionEvaluationOptions": {
+          "scope": "inner"
+        },
+        "template": {
+          "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+          "contentVersion": "1.0.0.0",
+          "metadata": {
+            "_generator": {
+              "name": "bicep",
+              "version": "0.4.1.14562",
+              "templateHash": "8381960602397537918"
+            }
+          },
+          "parameters": {
+            "adminUsername": {
+              "type": "string",
+              "defaultValue": "vmadmin",
+              "metadata": {
+                "description": "Username for the Virtual Machine."
+              }
+            },
+            "adminPassword": {
+              "type": "secureString",
+              "minLength": 12,
+              "metadata": {
+                "description": "Password for the Virtual Machine."
+              }
+            },
+            "domainUser": {
+              "type": "secureString",
+              "minLength": 8,
+              "metadata": {
+                "description": "User to join domain"
+              }
+            },
+            "domainPassword": {
+              "type": "secureString",
+              "minLength": 8,
+              "metadata": {
+                "description": "Password to join domain"
+              }
+            },
+            "OUPath": {
+              "type": "String",
+              "metadata": {
+                "description": "OU the server will be joined into"
+              }
+            },
+            "vmSize": {
+              "type": "string",
+              "metadata": {
+                "description": "Size of the virtual machine."
+              }
+            },
+            "osDiskSize": {
+              "type": "int",
+              "metadata": {
+                "description": "Size of the DataDisk."
+              }
+            },
+            "storageType": {
+              "type": "string",
+              "metadata": {
+                "description": "Storagetype of the VM."
+              }
+            },
+            "location": {
+              "type": "string",
+              "defaultValue": "[resourceGroup().location]",
+              "metadata": {
+                "description": "Location for all resources."
+              }
+            },
+            "vmName": {
+              "type": "string",
+              "defaultValue": "DEAZTSRV9",
+              "metadata": {
+                "description": "Name of the virtual machine."
+              }
+            },
+            "vnetResGroup": {
+              "type": "string",
+              "metadata": {
+                "description": "Specifies the name of the ResourceGroup of the virtual network hosting the virtual machine."
+              }
+            },
+            "vnetName": {
+              "type": "string",
+              "metadata": {
+                "description": "Specifies the name of the virtual network hosting the virtual machine."
+              }
+            },
+            "subnetName": {
+              "type": "string",
+              "metadata": {
+                "description": "Specifies the name of the Subnet within the virtual network hosting the virtual machine."
+              }
+            },
+            "osName": {
+              "type": "string",
+              "allowedValues": [
+                "Windows-2019",
+                "UbuntuServer-20.04"
+              ],
+              "metadata": {
+                "description": "Operating System"
+              }
+            },
+            "imageVersion": {
+              "type": "string",
+              "defaultValue": "latest",
+              "metadata": {
+                "description": "Choose specific image version. Defaul is latest"
+              }
+            },
+            "tagsByResource": {
+              "type": "object",
+              "metadata": {
+                "description": "Tags choosen in the UIDefinition"
+              }
+            }
+          },
+          "functions": [],
+          "variables": {
+            "nicName": "[concat(parameters('vmName'), '-NIC')]",
+            "subnetId": "[resourceId(parameters('vnetResGroup'),'Microsoft.Network/virtualNetworks/subnets', parameters('vnetName'),parameters('subnetName'))]"
+          },
+          "resources": [
+            {
+              "type": "Microsoft.Network/networkInterfaces",
+              "apiVersion": "2021-02-01",
+              "name": "[variables('nicName')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "ipConfigurations": [
+                  {
+                    "name": "ipconfig1",
+                    "properties": {
+                      "privateIPAllocationMethod": "Dynamic",
+                      "subnet": {
+                        "id": "[variables('subnetId')]"
+                      }
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "type": "Microsoft.Compute/virtualMachines",
+              "apiVersion": "2021-03-01",
+              "name": "[parameters('vmName')]",
+              "location": "[parameters('location')]",
+              "properties": {
+                "hardwareProfile": {
+                  "vmSize": "[parameters('vmSize')]"
+                },
+                "osProfile": {
+                  "computerName": "[parameters('vmName')]",
+                  "adminUsername": "[parameters('adminUsername')]",
+                  "adminPassword": "[parameters('adminPassword')]",
+                  "windowsConfiguration": {
+                    "provisionVMAgent": true,
+                    "enableAutomaticUpdates": true,
+                    "winRM": {
+                      "listeners": [
+                        {
+                          "protocol": "Http"
+                        }
+                      ]
+                    }
+                  }
+                },
+                "storageProfile": {
+                  "imageReference": {
+                    "id": "[resourceId('2504977c-0e66-497d-b7eb-b4ee9877e355','SharedImageLibrary-RG', 'Microsoft.Compute/galleries/images/versions', 'Glencore', parameters('osName'), parameters('imageVersion'))]"
+                  },
+                  "osDisk": {
+                    "createOption": "FromImage",
+                    "caching": "ReadWrite",
+                    "managedDisk": {
+                      "storageAccountType": "[parameters('storageType')]"
+                    },
+                    "diskSizeGB": "[parameters('osDiskSize')]"
+                  }
+                },
+                "networkProfile": {
+                  "networkInterfaces": [
+                    {
+                      "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
+                    }
+                  ]
+                },
+                "diagnosticsProfile": {
+                  "bootDiagnostics": {
+                    "enabled": true
+                  }
+                },
+                "licenseType": "Windows_Server"
+              },
+              "tags": "[ if(contains(parameters('tagsByResource'), 'Microsoft.Compute/virtualMachines'), parameters('tagsByResource')['Microsoft.Compute/virtualMachines'], json('{}')) ]",
+              "dependsOn": [
+                "[resourceId('Microsoft.Network/networkInterfaces', variables('nicName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Compute/virtualMachines/extensions",
+              "name": "[concat(parameters('vmName'),'/vmBGInfo')]",
+              "apiVersion": "2021-03-01",
+              "location": "[parameters('location')]",
+              "properties": {
+                "publisher": "Microsoft.Compute",
+                "type": "bginfo",
+                "typeHandlerVersion": "2.1",
+                "autoUpgradeMinorVersion": true
+              },
+              "dependsOn": [
+                "[concat('Microsoft.compute/virtualMachines/', parameters('vmName'))]"
+              ]
+            },
+            {
+              "type": "Microsoft.Compute/virtualMachines/extensions",
+              "name": "[concat(parameters('vmName'),'/joindomain')]",
+              "apiVersion": "2021-03-01",
+              "location": "[parameters('location')]",
+              "properties": {
+                "publisher": "Microsoft.Compute",
+                "type": "JsonADDomainExtension",
+                "typeHandlerVersion": "1.3",
+                "autoUpgradeMinorVersion": true,
+                "settings": {
+                  "User": "[parameters('domainUser')]",
+                  "Restart": true,
+                  "Name": "anyaccess.net",
+                  "Options": "3",
+                  "OUPath": "[parameters('OUPath')]"
+                },
+                "protectedSettings": {
+                  "password": "[parameters('domainPassword')]"
+                }
+              },
+              "dependsOn": [
+                "[concat('Microsoft.compute/virtualMachines/', parameters('vmName'))]"
+              ]
+            }
+          ],
+          "outputs": {
+            "networkInterface":{
+            "value": "[reference(resourceId('Microsoft.Network/networkInterfaces', variables('nicName')),'2016-09-01').ipConfigurations[0].properties.privateIPAddress]",
+            "type": "string"
+            }            
+          }
+        },
+        "parameters": {
+          "vmName": {
+            "value": "[toUpper(parameters('vmName'))]"
+          },
+          "vmSize": {
+            "value": "[parameters('vmSize')]"
+          },
+          "osDiskSize": {
+            "value": "[parameters('osDiskSize')]"
+          },
+          "storageType": {
+            "value": "[parameters('storageType')]"
+          },
+          "location": {
+            "value": "[parameters('location')]"
+          },
+          "OUPath": {
+            "value": "[parameters('OUPath')]"
+          },
+          "vnetResGroup": {
+            "value": "[parameters('vnetResGroup')]"
+          },
+          "vnetName": {
+            "value": "[parameters('vnetName')]"
+          },
+          "subnetName": {
+            "value": "[parameters('subnetName')]"
+          },
+          "osName": {
+            "value": "[parameters('osName')]"
+          },
+          "imageVersion": {
+            "value": "[parameters('imageVersion')]"
+          },
+          "tagsByResource": {
+            "value": "[parameters('tagsByResource')]"
+          },
+          "domainUser": {
+            "reference": {
+              "keyVault": {
+                "id": "/subscriptions/557dc8f3-20d6-4280-85c1-259bf85e7799/resourceGroups/GLBMGMTKeyVault-RG/providers/Microsoft.KeyVault/vaults/VMProvisioning"
+              },
+              "secretName": "GLBDomainJoin"
+            }
+          },
+          "domainPassword": {
+            "reference": {
+              "keyVault": {
+                "id": "/subscriptions/557dc8f3-20d6-4280-85c1-259bf85e7799/resourceGroups/GLBMGMTKeyVault-RG/providers/Microsoft.KeyVault/vaults/VMProvisioning"
+              },
+              "secretName": "GLBDomainJoinPW"
+            }
+          },
+          "adminPassword": {
+            "reference": {
+              "keyVault": {
+                "id": "/subscriptions/557dc8f3-20d6-4280-85c1-259bf85e7799/resourceGroups/GLBMGMTKeyVault-RG/providers/Microsoft.KeyVault/vaults/VMProvisioning"
+              },
+              "secretName": "GLBLocalAdmin"
+            }
+          }
+        }
+      }
+    }
+  ],
+  "outputs": {
+    "nameVM": {
+      "type": "string",
+      "value": "[parameters('vmName')]"
+    }
+  }
+}
