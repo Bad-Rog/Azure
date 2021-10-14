@@ -115,15 +115,15 @@
                             "constraints": {
                                 "allowedValues": [
                                     {
-                                        "label": "germanywestcentral",
+                                        "label": "Germany",
                                         "value": "germanywestcentral"
                                     },
                                     {
-                                        "label": "uksouth",
+                                        "label": "United Kingdom",
                                         "value": "uksouth"
                                     },
                                     {
-                                        "label": "canadacentral",
+                                        "label": "Canada",
                                         "value": "canadacentral"
                                     }
                                 ],
